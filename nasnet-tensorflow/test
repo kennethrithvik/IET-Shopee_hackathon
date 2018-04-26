@@ -1,0 +1,32 @@
+DATASET_DIR=/tmp/train/
+DATA_DIR=/tmp/train/
+TRAIN_DIR=./train
+CHECKPOINT_PATH=./pre-trained/nasnet-a_large_04_10_2017/model.ckpt
+
+
+python train_image_classifier.py \
+    --train_dir=${TRAIN_DIR} \
+    --dataset_dir=${DATASET_DIR} \
+    --dataset_name=customized \
+    --dataset_split_name=train \
+    --model_name=nasnet_large \
+    --checkpoint_path=${CHECKPOINT_PATH} \
+    --checkpoint_exclude_scopes=final_layer,aux_11 \
+    --trainable_scopes=final_layer,aux_11 \
+    --clone_on_cpu=True
+
+
+python freeze_graph.py \
+  --input_graph=./inference/nasnet_mobile_inf_graph.pb \
+  --input_checkpoint=./train/model.ckpt-29735.index \
+  --input_binary=true \
+  --output_graph=./inference/frozen_nasnet_mobile.pb \
+  --output_node_names=final_layer/predictions
+
+  python eval_image_classifier.py \
+    --alsologtostderr \
+    --checkpoint_path="./train/model.ckpt-0" \
+    --dataset_dir=./tmp/train \
+    --dataset_name=customized \
+    --dataset_split_name=validation \
+    --model_name=nasnet_large

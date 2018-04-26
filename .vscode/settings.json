@@ -1,0 +1,5 @@
+{
+    "python.formatting.provider": "autopep8",
+    "python.pythonPath": "/home/kenny/anaconda3/envs/image_classify/bin/python",
+    "python.linting.enabled": false
+}
