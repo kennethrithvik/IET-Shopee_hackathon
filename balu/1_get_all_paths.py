@@ -1,7 +1,7 @@
 from glob import glob
 import pandas as pd
 
-folders = glob('../data/train/*')
+folders = glob('../data/dataset/train/*')
 
 X = []
 y = []
@@ -15,8 +15,8 @@ for folder in folders:
 	y += [name for x in images]
 
 
-print len(X)
-print len(y)
+print (len(X))
+print (len(y))
 
 df = pd.DataFrame()
 df['path'] = pd.Series(X)

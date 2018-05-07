@@ -106,3 +106,5 @@ train/*
 inference/*
 tmp/*
 data/data.zip
+data/dataset/*
+

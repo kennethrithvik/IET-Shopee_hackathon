@@ -10,8 +10,8 @@ skf = StratifiedKFold(n_splits=4,random_state=42)
 
 for i,(train, test) in enumerate(skf.split(X, y)):
 	
-	print train.shape
-	print test.shape
+	print (train.shape)
+	print (test.shape)
 
 	trainX = pd.Series(X)[train]
 	trainY = pd.Series(y)[train]
